@@ -1,0 +1,50 @@
+﻿<Window x:Class="SimsProjekat.WPF.HomeWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimsProjekat.WPF"
+        mc:Ignorable="d"
+        Title="HomeWindow"
+        WindowState="Maximized">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <Button Grid.Row="0" Width="100" HorizontalAlignment="Right" Margin="10" Click="Button_Click">
+            <TextBlock>Log In</TextBlock>
+        </Button>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1" VerticalAlignment="Center">
+            <ComboBox x:Name="ParameterComboBox" SelectedItem="{Binding SearchParam}" Grid.Column="0" Margin="5" Width="150" SelectedIndex="0">
+                <ComboBoxItem Content="ID" />
+                <ComboBoxItem Content="Name" />
+                <ComboBoxItem Content="Construction Year" />
+                <ComboBoxItem Content="Rating" />
+                <ComboBoxItem Content="Apartments" />
+            </ComboBox>
+            <ComboBox x:Name="ApartmentComboBox" SelectedItem="{Binding ApartmentSearchParam}" Grid.Column="0" Margin="5" Width="150" SelectedIndex="0">
+                <ComboBoxItem Content="Rooms" />
+                <ComboBoxItem Content="Guest Number" />
+                <ComboBoxItem Content="Both" />
+            </ComboBox>
+            <TextBox x:Name="SearchTextBox" Text="{Binding SearchText}" TextChanged="SearchTextBox_TextChanged" Grid.Column="1" Margin="5" Width="250" />
+        </StackPanel>
+
+        <DataGrid ItemsSource="{Binding Hotels}" AutoGenerateColumns="False" CanUserAddRows="False" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Center" Margin="10">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding Id}" />
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" />
+                <DataGridTextColumn Header="Year of Construction" Binding="{Binding ConstructionYear}" />
+                <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" />
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

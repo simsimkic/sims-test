@@ -1,0 +1,40 @@
+# Ignore bin and obj directories
+bin/
+obj/
+
+# Visual Studio specific files
+.vs/
+*.user
+*.suo
+*.cache
+*.log
+*.vscode
+*.vssscc
+*_i.c
+*_p.c
+*.ncb
+*.sdf
+*.opensdf
+*.sln.docstates
+
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio code coverage results
+*.opendb
+*.log
+*.tlog
+*.diff
+*.lastbuildstate
+
+# Ignore SQLite database files
+*.sqlite
+*.db

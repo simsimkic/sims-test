@@ -1,0 +1,79 @@
+﻿<Window x:Class="SimsProjekat.WPF.OwnerView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SimsProjekat.WPF"
+        mc:Ignorable="d"
+        Title="OwnerView"
+        WindowState="Maximized">
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Button x:Name="LogoutButton" Grid.Row="0" Content="Logout" Click="LogoutButton_Click" HorizontalAlignment="Right" Margin="10"/>
+
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <StackPanel Orientation="Vertical" Margin="10">
+            <ComboBox x:Name="StatusComboBox" SelectedItem="{Binding SelectedStatus}" Margin="5" Width="150" SelectedIndex="0">
+                <ComboBoxItem Content="" />
+                <ComboBoxItem Content="Pending" />
+                <ComboBoxItem Content="Confirmed" />
+            </ComboBox>
+                <ListBox ItemsSource="{Binding Hotels}" SelectedItem="{Binding SelectedHotel}" SelectionMode="Single">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding HotelName}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock FontWeight="Bold" FontSize="16" Margin="5">Hotel Rating:</TextBlock>
+                                    <TextBlock Text="{Binding HotelRating}" FontWeight="Bold" FontSize="16" Margin="5"/>
+                                </StackPanel>
+
+                                <DataGrid x:Name="hotelReservationsDataGrid" ItemsSource="{Binding Reservations}" SelectedItem="{Binding DataContext.SelectedReservation, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBox}}}" 
+                                              AutoGenerateColumns="False" SelectionMode="Single" CanUserAddRows="False" HorizontalContentAlignment="Center">
+                                    <DataGrid.Columns>
+                                        <DataGridTextColumn Header="Apartment" FontWeight="Bold" Binding="{Binding Apartment.Name}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Description" Binding="{Binding Apartment.Description}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Rooms" Binding="{Binding Apartment.RoomCount}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Status" FontWeight="Bold" Binding="{Binding Status}" IsReadOnly="True"/>
+                                        <DataGridTextColumn Header="Date" FontWeight="Bold" Binding="{Binding ReservationDate}" IsReadOnly="True"/>
+                                    </DataGrid.Columns>
+                                </DataGrid>
+                                <Button x:Name="AddApartmentButton" Content="Add Apartment" Margin="5" Click="AddApartmentButton_Click"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10">
+                    <Button x:Name="AcceptReservation" Content="Accept" Click="AcceptReservation_Click" Margin="5"/>
+                    <Button x:Name="RejectReservation" Content="Reject" Click="RejectReservation_Click" Margin="5"/>
+                    <TextBox x:Name="RejectionTextBox" Visibility="Collapsed" Text="{Binding RejectionReason}" PreviewKeyDown="InputTextBox_PreviewKeyDown"  Width="200" Margin="5" />
+                </StackPanel>
+            </StackPanel>
+
+        <StackPanel Orientation="Vertical">
+                <TextBlock FontWeight="Bold">Hotel Requests</TextBlock>
+                <DataGrid x:Name="hotelRequestsDataGrid" ItemsSource="{Binding HotelRequests}" SelectedItem="{Binding SelectedRequest}" AutoGenerateColumns="False" CanUserAddRows="False" HorizontalContentAlignment="Center">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Construction Ysear" Binding="{Binding ConstructionYear}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Rating" Binding="{Binding Rating}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Owner" Binding="{Binding OwnerJmbg}" IsReadOnly="True"/>
+                        <DataGridTextColumn Header="Status" Binding="{Binding Status}" IsReadOnly="True"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                    <Button x:Name="AcceptRequestButton" Content="Accept" Click="AcceptRequestButton_Click" Margin="5"/>
+                    <Button x:Name="RejectRequestButston" Content="Reject" Click="RejectRequestButton_Click" Margin="5" Background="IndianRed"/>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+    </ScrollViewer>
+</Window>
